@@ -1,0 +1,378 @@
+def dağıtıcı(liste, kullanıcı):
+  for k in range(5):
+    random.shuffle(liste)
+  i=random.randint(0, len(liste)-1)
+  kart=liste[i]
+  liste.pop(i)
+  kullanıcı.append(kart)
+
+import random
+import time
+playerKazandı=0
+dealerKazandı=0
+
+print("Merhaba Hoş Geldiniz başlayalım mı? [Evet] [Hayır]")
+cevapPlayer= input("Player: ")
+playerAnswer=True
+dealerAnswer=True
+harflerP=[]
+harflerD=[]
+if cevapPlayer=="Evet":
+  cevapDealer=input("Dealer: ")
+  if cevapDealer=="Evet":
+
+    kartlar=[2,3,4,5,6,7,8,9,10,"J","Q","K","A",2,3,4,5,6,7,8,9,10,"J","Q","K","A",2,3,4,5,6,7,8,9,10,"J","Q","K","A",2,3,4,5,6,7,8,9,10,"J","Q","K","A"]
+
+    player=[]
+    dealer=[]
+
+    for i in range(2):
+      dağıtıcı(kartlar,player)
+    for i in range(2):
+      dağıtıcı(kartlar, dealer)
+
+    print(player[0])
+    print(dealer[0])
+
+
+    while True:
+      if "Q" in player:
+        player.append(11)
+        for i in range(player.count("Q")):
+          harflerP.append("Q")
+        while player.count("Q")>0:
+          player.remove("Q")
+      
+      if "J" in player:
+        player.append(11)
+        for i in range(player.count("J")):
+          harflerP.append("J")
+        while player.count("J")>0:
+          player.remove("J")
+
+      if "K" in player:
+        player.append(11)
+        for i in range(player.count("K")):
+          harflerP.append("K")
+        while player.count("K")>0:
+          player.remove("K")
+      
+      if "A" in player:
+        player.append(11)
+        for i in range(player.count("A")):
+         harflerP.append("A")
+        while player.count("A")>0:
+          player.remove("A")
+
+      if "Q" in dealer:
+        dealer.append(11)
+        for i in range(dealer.count("Q")):
+          harflerD.append("Q")
+        while dealer.count("Q")>0:
+          dealer.remove("Q")
+      
+      if "J" in dealer:
+        dealer.append(11)
+        for i in range(dealer.count("J")):
+          harflerD.append("J")
+        while dealer.count("J")>0:
+          dealer.remove("J")
+
+      if "K" in dealer:
+        dealer.append(11)
+        for i in range(dealer.count("K")):
+          harflerD.append("K")
+        while dealer.count("K")>0:
+          dealer.remove("K")
+      
+      if "A" in dealer:
+        dealer.append(11)
+        for i in range(dealer.count("A")):
+          harflerD.append("A")
+        while dealer.count("A")>0:
+          dealer.remove("A")
+
+
+
+      playerSum=sum(player)
+      dealerSum=sum(dealer)
+
+      if playerSum>21 and dealerSum>21:
+        basmakD=dealer
+        while basmakD.count(11)>0:
+          basmakD.remove(11)
+        basmakP=player
+        while basmakP.count(11)>0:
+          basmakP.remove(11)
+        print("İkimiz De Kaybettik")
+        print(f"Player Toplam: {playerSum}\nKartlar: {basmakP+harflerP}")
+        print(f"Dealer Toplam: {dealerSum} \nKartlar: {basmakD+harflerD}")
+        print("---------------------------------")
+        rövanşP=input("Player Rövanş İster Misin? [Evet] [Hayır] ")
+        if rövanşP=="Evet":
+          rövanşD=input("Dealer Player Rövanş İstiyor Kabul Ediyor Musun? [Evet] [Hayır] ")
+          if rövanşD=="Evet":
+            print("Başlıyoruz")
+            time.sleep(1)
+            print("3")
+            time.sleep(1)
+            print("2")
+            time.sleep(1)
+            print("1")
+            time.sleep(1)
+            print("---------------------------------")
+            kartlar.clear()
+            kartlar=[2,3,4,5,6,7,8,9,10,"J","Q","K","A",2,3,4,5,6,7,8,9,10,"J","Q","K","A",2,3,4,5,6,7,8,9,10,"J","Q","K","A",2,3,4,5,6,7,8,9,10,"J","Q","K","A"]
+            player.clear()
+            dealer.clear()
+            harflerP.clear()
+            harflerD.clear()
+            playerSum=0
+            dealerSum=0
+            basmakD.clear()
+            basmakP.clear()
+
+            for i in range(2):
+              dağıtıcı(kartlar,player)
+            for i in range(2):
+              dağıtıcı(kartlar, dealer)
+            print(player[0])
+            print(dealer[0])
+          elif rövanşD=="Hayır":
+            print("Player DealerTeklifini Kabul Etmedi")
+            print(f"Player {playerKazandı} Kere Kazandı")
+            print(f"Dealer {dealerKazandı} Kere Kazandı")
+            break
+          else:
+            print("Anlaşılmadı Sonlandırılıyor")
+            print(f"Player {playerKazandı} Kere Kazandı")
+            print(f"Dealer {dealerKazandı} Kere Kazandı")
+            break
+        elif rövanşP=="Hayır":
+          print("Sen Nasıl İstersen Player")
+          print("Sonlandırılıyor")
+          print(f"Player {playerKazandı} Kere Kazandı")
+          print(f"Dealer {dealerKazandı} Kere Kazandı")
+          break
+        else:
+            print("Anlaşılmadı Sonlandırılıyor")
+            print(f"Player {playerKazandı} Kere Kazandı")
+            print(f"Dealer {dealerKazandı} Kere Kazandı")
+            break
+
+
+      elif playerSum==21 and dealerSum==21:
+        basmakD=dealer
+        while basmakD.count(11)>0:
+          basmakD.remove(11)
+        basmakP=player
+        while basmakP.count(11)>0:
+          basmakP.remove(11)
+        print("Berabere Kaldık")
+        print(f"Player Toplam: {playerSum}\nKartlar: {basmakP+harflerP}")
+        print(f"Dealer Toplam: {dealerSum} \nKartlar: {basmakD+harflerD}")
+        print("---------------------------------")
+        rövanşD=input("Dealer Rövanş İster Misin? [Evet] [Hayır] ")
+        if rövanşD=="Evet":
+          rövanşP=input("Player Dealer Rövanş İstiyor Kabul Ediyor Musun? [Evet] [Hayır] ")
+          if rövanşP=="Evet":
+            print("Başlıyoruz")
+            time.sleep(1)
+            print("3")
+            time.sleep(1)
+            print("2")
+            time.sleep(1)
+            print("1")
+            time.sleep(1)
+            print("---------------------------------")
+            kartlar.clear()
+            kartlar=[2,3,4,5,6,7,8,9,10,"J","Q","K","A",2,3,4,5,6,7,8,9,10,"J","Q","K","A",2,3,4,5,6,7,8,9,10,"J","Q","K","A",2,3,4,5,6,7,8,9,10,"J","Q","K","A"]
+            player.clear()
+            dealer.clear()
+            harflerP.clear()
+            harflerD.clear()
+            playerSum=0
+            dealerSum=0
+            basmakD.clear()
+            basmakP.clear()
+
+            for i in range(2):
+              dağıtıcı(kartlar,player)
+            for i in range(2):
+              dağıtıcı(kartlar, dealer)
+            print(player[0])
+            print(dealer[0])
+          elif rövanşP=="Hayır":
+            print("Dealer Player Teklifini Kabul Etmedi")
+            print(f"Player {playerKazandı} Kere Kazandı")
+            print(f"Dealer {dealerKazandı} Kere Kazandı")
+            break
+          else:
+            print("Anlaşılmadı Sonlandırılıyor")
+            print(f"Player {playerKazandı} Kere Kazandı")
+            print(f"Dealer {dealerKazandı} Kere Kazandı")
+            break
+        elif rövanşD=="Hayır":
+          print("Sen Nasıl İstersen Dealer")
+          print("Sonlandırılıyor")
+          print(f"Player {playerKazandı} Kere Kazandı")
+          print(f"Dealer {dealerKazandı} Kere Kazandı")
+          break
+        else:
+            print("Anlaşılmadı Sonlandırılıyor")
+            print(f"Player {playerKazandı} Kere Kazandı")
+            print(f"Dealer {dealerKazandı} Kere Kazandı")
+            break
+        
+      elif playerSum>21 and dealerSum<=21:
+        basmakD=dealer
+        while basmakD.count(11)>0:
+          basmakD.remove(11)
+        basmakP=player
+        while basmakP.count(11)>0:
+          basmakP.remove(11)
+        dealerKazandı=dealerKazandı+1
+        print(f"Ha Ha! Player Kaybettin! Toplamın 21'i geçti\nToplam: {playerSum}\nKartlar: {basmakP+harflerP}")
+        print(f"Ha Ha! Dealer Kazandın! Tebrikler!\nToplam: {dealerSum} \nKartlar: {basmakD+harflerD}")
+        print("---------------------------------")
+        rövanşP=input("Player Rövanş İster Misin? [Evet] [Hayır] ")
+        if rövanşP=="Evet":
+          rövanşD=input("Dealer Player Rövanş İstiyor Kabul Ediyor Musun? [Evet] [Hayır] ")
+          if rövanşD=="Evet":
+            print("Başlıyoruz")
+            time.sleep(1)
+            print("3")
+            time.sleep(1)
+            print("2")
+            time.sleep(1)
+            print("1")
+            time.sleep(1)
+            print("---------------------------------")
+            kartlar.clear()
+            kartlar=[2,3,4,5,6,7,8,9,10,"J","Q","K","A",2,3,4,5,6,7,8,9,10,"J","Q","K","A",2,3,4,5,6,7,8,9,10,"J","Q","K","A",2,3,4,5,6,7,8,9,10,"J","Q","K","A"]
+            player.clear()
+            dealer.clear()
+            harflerP.clear()
+            harflerD.clear()
+            playerSum=0
+            dealerSum=0
+            basmakD.clear()
+            basmakP.clear()
+
+            for i in range(2):
+              dağıtıcı(kartlar,player)
+            for i in range(2):
+              dağıtıcı(kartlar, dealer)
+            print(player[0])
+            print(dealer[0])
+          elif rövanşD=="Hayır":
+            print("Player Dealer Teklifini Kabul Etmedi")
+            print(f"Player {playerKazandı} Kere Kazandı")
+            print(f"Dealer {dealerKazandı} Kere Kazandı")
+            break
+          else:
+            print("Anlaşılmadı Sonlandırılıyor")
+            print(f"Player {playerKazandı} Kere Kazandı")
+            print(f"Dealer {dealerKazandı} Kere Kazandı")
+            break
+        elif rövanşP=="Hayır":
+          print("Sen Nasıl İstersen Player")
+          print("Sonlandırılıyor")
+          print(f"Player {playerKazandı} Kere Kazandı")
+          print(f"Dealer {dealerKazandı} Kere Kazandı")
+          break
+        else:
+            print("Anlaşılmadı Sonlandırılıyor")
+            print(f"Player {playerKazandı} Kere Kazandı")
+            print(f"Dealer {dealerKazandı} Kere Kazandı")
+            break
+        
+      elif playerSum<=21 and dealerSum>21:
+        basmakD=dealer
+        while basmakD.count(11)>0:
+          basmakD.remove(11)
+        basmakP=player
+        while basmakP.count(11)>0:
+          basmakP.remove(11)
+        playerKazandı=playerKazandı+1
+        print(f"Dealer Kaybettin! Toplamın 21'i geçti\nToplam: {dealerSum} \nKartlar: {basmakD+harflerD}")
+
+        print(f"Player Kazandın! Tebrikler!\nKartların: {basmakP+harflerP}")
+        print("---------------------------------")
+        rövanşD=input("Dealer Rövanş İster Misin? [Evet] [Hayır] ")
+        if rövanşD=="Evet":
+          rövanşP=input("Player Dealer Rövanş İstiyor Kabul Ediyor Musun? [Evet] [Hayır] ")
+          if rövanşP=="Evet":
+            print("Başlıyoruz")
+            time.sleep(1)
+            print("3")
+            time.sleep(1)
+            print("2")
+            time.sleep(1)
+            print("1")
+            time.sleep(1)
+            print("---------------------------------")
+            kartlar.clear()
+            kartlar=[2,3,4,5,6,7,8,9,10,"J","Q","K","A",2,3,4,5,6,7,8,9,10,"J","Q","K","A",2,3,4,5,6,7,8,9,10,"J","Q","K","A",2,3,4,5,6,7,8,9,10,"J","Q","K","A"]
+            player.clear()
+            dealer.clear()
+            harflerP.clear()
+            harflerD.clear()
+            playerSum=0
+            dealerSum=0
+            basmakD.clear()
+            basmakP.clear()
+
+            for i in range(2):
+              dağıtıcı(kartlar,player)
+            for i in range(2):
+              dağıtıcı(kartlar, dealer)
+            print(player[0])
+            print(dealer[0])
+          elif rövanşP=="Hayır":
+            print("Dealer Player Teklifini Kabul Etmedi")
+            print(f"Player {playerKazandı} Kere Kazandı")
+            print(f"Dealer {dealerKazandı} Kere Kazandı")
+            break
+          else:
+            print("Anlaşılmadı Sonlandırılıyor")
+            print(f"Player {playerKazandı} Kere Kazandı")
+            print(f"Dealer {dealerKazandı} Kere Kazandı")
+            break
+        elif rövanşD=="Hayır":
+          print("Sen Nasıl İstersen Dealer")
+          print("Sonlandırılıyor")
+          print(f"Player {playerKazandı} Kere Kazandı")
+          print(f"Dealer {dealerKazandı} Kere Kazandı")
+          break
+        else:
+            print("Anlaşılmadı Sonlandırılıyor")
+            print(f"Player {playerKazandı} Kere Kazandı")
+            print(f"Dealer {dealerKazandı} Kere Kazandı")
+            break
+      else:
+        if playerAnswer==True:
+          soruP=input("Player Tamam Mı Devam Mı? [Devam] [Tamam]\n")
+          if soruP=="Tamam":
+            playerAnswer==False
+
+          elif soruP=="Devam":
+            playerAnswer==True
+            dağıtıcı(kartlar, player)
+
+        if dealerAnswer==True:
+          soruD=input("Dealer Tamam Mı Devam Mı? [Devam] [Tamam]\n")
+          if soruD=="Tamam":
+            dealerAnswer==False
+          elif soruD=="Devam":
+            dealerAnswer==True
+            dağıtıcı(kartlar, dealer)
+        else:
+          print("Merhaba")
+        
+        
+
+elif cevapPlayer=="Hayır":
+  print("Sen nasıl İstersen Player")
+else:
+  print("Cevap Anlaşılmadı") 
